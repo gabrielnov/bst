@@ -1,14 +1,14 @@
 #include "bst.h"
 #include <iostream>
 
-void ArvoreBST::inserir(int chave){
+void ArvoreBST::inserir(int chave, Pessoa p){
         if(raiz == NULL) 
-            raiz = new No(chave); 
+            raiz = new No(chave, p); 
         else
-            inserirAux(raiz, chave);
+            inserirAux(raiz, chave, p);
 }
 
- void ArvoreBST::inserirAux(No *no, int chave)
+ void ArvoreBST::inserirAux(No *no, int chave, Pessoa p)
     {
         // se for menor, ent�o insere na sub-�rvore � esquerda
         if(chave < no->getChave())
@@ -16,7 +16,7 @@ void ArvoreBST::inserir(int chave){
             // verifica se n�o tem filho a esquerda: achou local de inser��o 
             if(no->getEsq() == NULL)
             {
-                No *novo_no = new No(chave);
+                No *novo_no = new No(chave, p);
                 no->setEsq(novo_no); // add o novo_no � esquerda do n� atual
             }
             else
@@ -31,13 +31,13 @@ void ArvoreBST::inserir(int chave){
             // verifica se n�o tem filho a direita: achou local de inser��o
             if(no->getDir() == NULL)
             {
-                No *novo_no = new No(chave);
+                No *novo_no = new No(chave, p);
                 no->setDir(novo_no); // add o novo_no � direita do n� atual
             }
             else
             {
                 // sen�o, continua percorrendo recursivamente para direita
-                inserirAux(no->getDir(), chave);
+                inserirAux(no->getDir(), chave, p);
             }
         }
         // se a chave for igual a alguma presente na �rvore, n�o vamos inserir
@@ -108,7 +108,7 @@ int ArvoreBST::contarNos(No* atual)
     }
 }
 
-No* ArvoreBST::excluir(No* t, int key){
+No* ArvoreBST::excluir(No* t, std::string key){
         
         //Arvore t � vazia
         if (t == NULL) 

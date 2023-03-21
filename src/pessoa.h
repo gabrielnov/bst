@@ -5,6 +5,13 @@ class Pessoa{
         float salarioBruto;
     
     public:
+        ~Pessoa();
+        Pessoa(std::string cargo, std::string unidade, float salarioBruto){
+            this->cargo = cargo;
+            this->unidade = unidade;
+            this->salarioBruto = salarioBruto;
+        }
+        
         std::string getCargo(){return cargo;}
         std::string getUnidade(){return unidade;}
         float getSalarioBruto(){return salarioBruto;}

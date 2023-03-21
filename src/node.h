@@ -6,7 +6,7 @@ class No
 private:
     No *esq, *dir;
     std::string chave;
-    Pessoa pessoa;
+    Pessoa *pessoa;
 
 public:
     No(std::string chave, Pessoa p)

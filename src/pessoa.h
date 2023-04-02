@@ -1,3 +1,9 @@
+#ifndef __PESSOA_H__
+#define __PESSOA_H__
+
+
+#include <iostream>
+
 class Pessoa{
     private:
         std::string cargo;
@@ -18,4 +24,6 @@ class Pessoa{
         void setCargo(std::string cargo){this->cargo = cargo;}
         void setUnidade(std::string unidade){this->unidade = unidade;}
         void setSalarioBruto(float salarioBruto){this->salarioBruto = salarioBruto;}
-}
+};
+
+#endif

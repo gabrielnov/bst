@@ -1,14 +1,14 @@
 #include "bst.h"
 #include <iostream>
 
-void ArvoreBST::inserir(int chave, Pessoa p){
+void ArvoreBST::inserir(std::string chave, Pessoa *p){
         if(raiz == NULL) 
             raiz = new No(chave, p); 
         else
             inserirAux(raiz, chave, p);
 }
 
- void ArvoreBST::inserirAux(No *no, int chave, Pessoa p)
+ void ArvoreBST::inserirAux(No *no, std::string chave, Pessoa *p)
     {
         // se for menor, ent�o insere na sub-�rvore � esquerda
         if(chave < no->getChave())
@@ -22,7 +22,7 @@ void ArvoreBST::inserir(int chave, Pessoa p){
             else
             {
                 // sen�o, continua percorrendo recursivamente para esquerda
-                inserirAux(no->getEsq(), chave);
+                inserirAux(no->getEsq(), chave, p);
             }
         }
         // se for maior, ent�o insere na sub-�rvore � direita
@@ -74,7 +74,7 @@ void ArvoreBST::posOrdem(No* no)
     }
 }
 
-No* ArvoreBST::Pesquisar (No* r, int k)
+No* ArvoreBST::Pesquisar (No* r, std::string k)
 {
     if (r == NULL || r->getChave() == k)
         return r;

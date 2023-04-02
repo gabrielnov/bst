@@ -9,7 +9,7 @@ private:
     Pessoa *pessoa;
 
 public:
-    No(std::string chave, Pessoa p)
+    No(std::string chave, Pessoa *p)
     {
         this->chave = chave;
         this->pessoa = p;
@@ -24,7 +24,3 @@ public:
     void setChave(std::string k){chave = k;}
 };
 
-int main(){
-
-    return 0;
-}

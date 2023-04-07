@@ -26,13 +26,15 @@ void printMenu(){
 		<< "[6] Analise de dados E\n"
 		<< "[7] Remover funcionario\n"
 		<< "[8] Salvar dados\n"
-		<< "[9] Encerrar\n\n"
+		<< "[9] Encerrar\n"
+		<< "[0] Imprimir dados (use com cautela)\n\n"
 		<< "Digite a opcao: ";		
 }
 
 bool readOption(char opt, ArvoreBST* bst, bool* fileRead){
 	std::string nome;
-
+	No *resp;
+	
 	switch(opt){
 			case '1':
 				readFile(bst);
@@ -43,7 +45,6 @@ bool readOption(char opt, ArvoreBST* bst, bool* fileRead){
 					std::cout << "Necessario ler os dados primeiro (opcao 1)";
 					break;
 				}
-				ll->print();
 				break;
 			case '3':
 				
@@ -55,33 +56,46 @@ bool readOption(char opt, ArvoreBST* bst, bool* fileRead){
 				
 			case '6':
 				if (!*fileRead){
-					std::cout << "Necessario ler os dados primeiro (opcao 1)";
+					std::cout << "Necessario ler os dados primeiro (opcao 1)" << std::endl;
 					break;
 				}
-				analysisA(ll);
 				break;
 			case '7':
 				if (!*fileRead){
-					std::cout << "Necessario ler os dados primeiro (opcao 1)";
+					std::cout << "Necessario ler os dados primeiro (opcao 1)" << std::endl;
 					break;
 				}
 				std::cin.ignore(256, '\n'); 
 				std::cout << "Insira o nome do funcionario a ser removido: ";
-                std::cin >> nome;
-                
-				No *n = bst->excluir(nome);
+                std::getline(std::cin, nome);
+
+				resp = bst->excluir(bst->getRaiz(), nome);
+
+				bst->setRaiz(resp);
+
+				if (resp == NULL)
+					std::cout << "A arvore esta vazia!" << std::endl;
+
+				break;
+
 			case '8':
 				if (!*fileRead){
-					std::cout << "Necessario ler os dados primeiro (opcao 1)";
+					std::cout << "Necessario ler os dados primeiro (opcao 1) " << std::endl;
 					break;
 				}
 				saveFile(bst);
 				break;
 			case '9':
-				std::cout << "Encerrando programa...";
+				std::cout << "Encerrando programa..."<< std::endl;
 				return true;
+			case '0':
+				std::cout << "!!! Imprimindo dados. Boa sorte !!! " << std::endl;
+				bst->print();
+
+				break;
+			return true;
 			default:
-				std::cout << "Opcao invalida. Tenta novamente";
+				std::cout << "Opcao invalida. Tenta novamente"<< std::endl;
 		}
 	return false;
 }

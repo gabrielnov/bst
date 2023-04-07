@@ -49,7 +49,7 @@ void ArvoreBST::emOrdem(No* no)
     if(no != NULL)
     {
         emOrdem(no->getEsq());
-        std::cout << no->getChave() << " ";
+        std::cout << no->getChave() << std::endl;
         emOrdem(no->getDir());
     }
 }
@@ -204,7 +204,7 @@ No* ArvoreBST::excluir(No* t, std::string key){
 
     void ArvoreBST::print()
 	{
-  		print(raiz, 0);
+  		emOrdem(raiz);
 	}
 
 	void ArvoreBST::print(No *no, int space)

@@ -8,11 +8,21 @@ void readFile(ArvoreBST *bst){
 	std::cout << "Informe o caminho do arquivo a ser lido: ";
 	std::cin >> caminho;
 
+	std::cout << "abrindo arquivo " << caminho << "... " << std::endl;
+
 	std::fstream f;
     f.open(caminho, std::ios::in); 
     
+	// verificamos se o arquivo realmente existe
+	if (!f){
+		std::cout << "!!! O arquivo informado nao existe. Tente novamente. !!!" << std::endl;
+		readFile(bst);
+	}
+
     std::string line;
 	std::string* stringArray = new std::string[13];
+
+	std::cout << "lendo linhas do arquivo " << caminho << "... " << std::endl;
 
     getline(f, line);
 
@@ -23,7 +33,19 @@ void readFile(ArvoreBST *bst){
 			
 			nome = stringArray[1];
 			cargo = stringArray[2];
-			salarioBruto = std::stof(stringArray[6]);
+			
+			if (cargo == " "){
+				cargo = "sem cargo base";
+			}
+
+			//algumas linhas possuem o valor em branco ou inválido, isso causa exceção na conversão
+			try{
+				salarioBruto = std::stof(stringArray[6]);
+			} 
+			catch( ... ){
+				salarioBruto = 0.0;
+			}
+			
 			unidade = stringArray[7];
 
 	    	Pessoa * p = new Pessoa(cargo, unidade, salarioBruto);
@@ -57,6 +79,20 @@ void substring(std::string s, std::string* v){
 	}
 }
 
+void escreverLinha(No* no, std::fstream *f)
+{
+    if(no != NULL)
+    {
+        escreverLinha(no->getEsq(), f);
+        
+		*f << no->getChave() << ";"
+		<< no->getPessoa()->getCargo() << ";"
+		<< no->getPessoa()->getSalarioBruto() << ";"
+		<< no->getPessoa()->getUnidade() << "\n";
+		
+        escreverLinha(no->getDir(), f);
+    }
+}
 
 void saveFile(ArvoreBST *bst){
     std::string caminho;
@@ -67,26 +103,10 @@ void saveFile(ArvoreBST *bst){
 
 	f.open(caminho, std::ofstream::out | std::ofstream::trunc);	
 	
-	f << "cargo;salario bruto;unidade\n";
+	f << "cargo base;salario bruto;unidade\n";
 	
-	// NodeLL *pAnda;
-	
-    // pAnda = ll->getHead();
-    // while (pAnda != nullptr){
-    //   	f << pAnda->getId()->getDisciplina() << ";"
-    //   		<< pAnda->getId()->getIsbn() << ";"
-    //   		<< pAnda->getId()->getTitulo() << ";"
-    //   		<< pAnda->getId()->getAutor() << ";"
-    //   		<< pAnda->getId()->getEdicao() << ";"
-    //   		<< pAnda->getId()->getCidade() << ";"
-    //   		<< pAnda->getId()->getEditora() << ";"
-    //   		<< pAnda->getId()->getAno() << ";"
-    //   		<< pAnda->getId()->getBasica() << std::endl;
-    //     pAnda = pAnda->getProx();
-	// }	
-    
-	// delete pAnda;
-    // pAnda = nullptr;
+	std::cout << "escrevendo linhas no arquivo " << caminho << "..." << std::endl;
+	escreverLinha(bst->getRaiz(), &f);
     
     f.close();
     

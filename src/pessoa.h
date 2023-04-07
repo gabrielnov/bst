@@ -1,8 +1,7 @@
 #ifndef __PESSOA_H__
 #define __PESSOA_H__
 
-
-#include <iostream>
+#include <string>
 
 class Pessoa{
     private:
@@ -12,6 +11,7 @@ class Pessoa{
     
     public:
         ~Pessoa();
+        Pessoa();
         Pessoa(std::string cargo, std::string unidade, float salarioBruto){
             this->cargo = cargo;
             this->unidade = unidade;

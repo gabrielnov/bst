@@ -34,7 +34,8 @@ public:
     void infs(No* r);
     void print();
 	void print(No *no, int space);
-    
+    void analise1(std::string nome1, std::string nome2);
+    void somaAll(std::string procurar, float *soma, int* pessoas, No *no);
 };
 
 

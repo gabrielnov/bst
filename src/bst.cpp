@@ -49,7 +49,7 @@ void ArvoreBST::emOrdem(No* no)
     if(no != NULL)
     {
         emOrdem(no->getEsq());
-        std::cout << no->getChave() << std::endl;
+        std::cout << no->getPessoa()->getSalarioBruto() << std::endl;
         emOrdem(no->getDir());
     }
 }
@@ -214,8 +214,37 @@ No* ArvoreBST::excluir(No* t, std::string key){
     		print(no->getDir(), space + 5);
     		for (int k = 0; k < space; ++k) 
 				std::cout << " ";
-    		std::cout << no->getChave() << "\n";
+//    		std::cout << no->getChave() << "\n";
+    		std::cout << no->getPessoa()->getSalarioBruto() << "\n";
     		print(no->getEsq(), space + 5);
   		}
+	}
+	
+	void ArvoreBST::somaAll(std::string procurar, float *soma, int* pessoas, No *no){
+		if (no != NULL)
+  		{	
+  			if(no->getPessoa()->getCargo() == procurar){
+  				std::cout << "entramos";
+  				std::cout << no->getChave();
+  				*soma = *soma + no->getPessoa()->getSalarioBruto();
+  				*pessoas += 1;
+			}
+    		somaAll(procurar, soma, pessoas, no->getDir());
+    		somaAll(procurar, soma, pessoas, no->getEsq());
+  		}
+	}
+	
+	void ArvoreBST::analise1(std::string cargo1, std::string cargo2){
+		float soma = 0, *p = &soma, media1 = 0, media2 = 0;
+		int pessoas = 0, *z = &pessoas;
+		somaAll(cargo1, p, z, raiz);
+		media1 = soma/pessoas;
+		std::cout << media1 << " " << pessoas << std::endl;
+		*p = 0, *soma = 0;
+		somaAll(cargo2, p, z, raiz);
+		media2 = soma/pessoas;
+		std::cout << media2 << " " << pessoas << std::endl;
+		std::cout << "diferenca entre cargo1 e cargo2: " << (media2-media1) << std::endl;
+		std::cout << "relação de media entre cargo1 e cargo2 em porcentagem: " << ((media2-media1)/media1)*100 << std::endl;
 	}
     

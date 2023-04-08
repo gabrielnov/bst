@@ -33,7 +33,7 @@ void readFile(ArvoreBST *bst){
 			
 			nome = stringArray[1];
 			cargoBase = stringArray[2];
-			cargoComissao = stringArray[2];
+			cargoComissao = stringArray[3];
 			
 			if (cargoBase == " "){
 				cargoBase = "sem cargo base";

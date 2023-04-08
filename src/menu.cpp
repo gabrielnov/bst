@@ -50,7 +50,7 @@ bool readOption(char opt, ArvoreBST* bst, bool* fileRead){
 				std::cin.ignore();
 				std::cout << "cargo1 "; std::getline(std::cin, cargo1);
 				std::cout << "cargo2 "; std::getline(std::cin, cargo2);
-				bst->analise1(cargo1, cargo2);
+				bst->auxAnalise1(cargo1, cargo2);
 				break;
 			case '4':
 				

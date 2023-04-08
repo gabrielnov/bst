@@ -2,6 +2,7 @@
 #define __BST_H__
 
 #include <iostream>
+#include <limits>
 #include "pessoa.h"
 #include "node.h"
 
@@ -34,8 +35,10 @@ public:
     void infs(No* r);
     void print();
 	void print(No *no, int space);
-    void analise1(std::string nome1, std::string nome2);
-    void somaAll(std::string procurar, float *soma, int* pessoas, No *no);
+    void analise1(std::string procurar, float *soma, int* pessoas, No *no);
+    void findMaxAnalise1(std::string procurar, float *maximo, No* no);
+	void findMinAnalise1(std::string procurar, float *minimo, No* no);
+    void auxAnalise1(std::string cargo1, std::string cargo2);
 };
 
 

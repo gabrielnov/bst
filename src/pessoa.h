@@ -12,7 +12,12 @@ class Pessoa{
     
     public:
         ~Pessoa();
-        Pessoa();
+        Pessoa(){
+        	this->cargoBase = " ";
+        	this->cargoComissao = " ";
+        	this->unidade = " ";
+        	this->salarioBruto = 0.0;
+		};
         Pessoa(std::string cargoBase, std::string cargoComissao, std::string unidade, float salarioBruto){
             this->cargoBase = cargoBase;
             this->cargoComissao = cargoComissao;

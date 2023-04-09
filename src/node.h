@@ -12,6 +12,12 @@ private:
     Pessoa *pessoa;
 
 public:
+	No(){
+		this->chave = " ";
+		this->pessoa = new Pessoa();
+		esq = NULL;
+		dir = NULL;
+	}
     No(std::string chave, Pessoa *p)
     {
         this->chave = chave;

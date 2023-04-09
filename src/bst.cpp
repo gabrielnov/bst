@@ -236,43 +236,79 @@ No* ArvoreBST::excluir(No* t, std::string key){
 //		mediaSalario(p, z, raiz);
 //	}
 	
-	//Analise 1
-	void ArvoreBST::analise1(std::string procurar, float *soma, int* pessoas, No *no){
+	void ArvoreBST::mediaAnalise(std::string procurar, float *soma, int* pessoas, No *no, int choice){
 		if (no != NULL)
   		{	
-  			if(no->getPessoa()->getCargoBase() == procurar || no->getPessoa()->getCargoComissao() == procurar){
+  			if(choice == 3){
+  				if(no->getPessoa()->getCargoBase() == procurar || no->getPessoa()->getCargoComissao() == procurar){
 //  				std::cout << no->getChave() << std::endl;
-  				*soma = *soma + no->getPessoa()->getSalarioBruto();
+  					*soma = *soma + no->getPessoa()->getSalarioBruto();
+  					*pessoas += 1;
+				}	
+			} else if (choice == 4){
+				if(no->getPessoa()->getUnidade() == procurar){
+//  				std::cout << no->getChave() << std::endl;
+  					*soma = *soma + no->getPessoa()->getSalarioBruto();
+  					*pessoas += 1;
+				}
+			} else if (choice == 5){
+				*soma = *soma + no->getPessoa()->getSalarioBruto();
   				*pessoas += 1;
 			}
-    		analise1(procurar, soma, pessoas, no->getDir());
-    		analise1(procurar, soma, pessoas, no->getEsq());
+    		mediaAnalise(procurar, soma, pessoas, no->getDir(), choice);
+    		mediaAnalise(procurar, soma, pessoas, no->getEsq(), choice);
   		}
 	}
 	
-	void ArvoreBST::findMaxAnalise1(std::string procurar, float *maximo, No* no){
+	void ArvoreBST::findMaxAnalise(std::string procurar, float *maximo, No* no, int choice, No* noMaximo){
 		if (no != NULL)
   		{	
-  			if(no->getPessoa()->getCargoBase() == procurar || no->getPessoa()->getCargoComissao() == procurar){
-  				if(no->getPessoa()->getSalarioBruto() > *maximo){
+  			if(choice == 3){
+  				if(no->getPessoa()->getCargoBase() == procurar || no->getPessoa()->getCargoComissao() == procurar){
+  					if(no->getPessoa()->getSalarioBruto() > *maximo){
+  						*maximo = no->getPessoa()->getSalarioBruto();
+					}
+				}
+			} else if (choice == 4) {
+				if(no->getPessoa()->getUnidade() == procurar){
+  					if(no->getPessoa()->getSalarioBruto() > *maximo){
+  						*maximo = no->getPessoa()->getSalarioBruto();
+					}
+				}
+			} else if (choice == 5){
+				if(no->getPessoa()->getSalarioBruto() > *maximo){
   					*maximo = no->getPessoa()->getSalarioBruto();
+  					noMaximo = no;
 				}
 			}
-    		findMaxAnalise1(procurar, maximo, no->getDir());
-    		findMaxAnalise1(procurar, maximo, no->getEsq());
+    		findMaxAnalise(procurar, maximo, no->getDir(), choice, noMaximo);
+    		findMaxAnalise(procurar, maximo, no->getEsq(), choice, noMaximo);
   		}
 	}
 	
-	void ArvoreBST::findMinAnalise1(std::string procurar, float *minimo, No* no){
+	void ArvoreBST::findMinAnalise(std::string procurar, float *minimo, No* no, int choice, No* noMinimo){
 		if (no != NULL)
   		{	
-  			if(no->getPessoa()->getCargoBase() == procurar || no->getPessoa()->getCargoComissao() == procurar){
-  				if(no->getPessoa()->getSalarioBruto() < *minimo){
+  			if(choice == 3){
+  				if(no->getPessoa()->getCargoBase() == procurar || no->getPessoa()->getCargoComissao() == procurar){
+  					if(no->getPessoa()->getSalarioBruto() < *minimo){
+  						*minimo = no->getPessoa()->getSalarioBruto();
+					}
+				}	
+			} else if (choice == 4){
+				if(no->getPessoa()->getUnidade() == procurar){
+  					if(no->getPessoa()->getSalarioBruto() < *minimo){
+  						*minimo = no->getPessoa()->getSalarioBruto();
+					}
+				}
+			} else if (choice == 5){
+				if(no->getPessoa()->getSalarioBruto() < *minimo){
   					*minimo = no->getPessoa()->getSalarioBruto();
+  					noMinimo = no;
 				}
 			}
-    		findMinAnalise1(procurar, minimo, no->getDir());
-    		findMinAnalise1(procurar, minimo, no->getEsq());
+    		findMinAnalise(procurar, minimo, no->getDir(), choice, noMinimo);
+    		findMinAnalise(procurar, minimo, no->getEsq(), choice, noMinimo);
   		}
 	}
 	
@@ -283,25 +319,25 @@ No* ArvoreBST::excluir(No* t, std::string key){
 		int pessoas = 0, *pPessoas = &pessoas;
 		
 		//media cargo 1
-		analise1(cargo1, pSoma, pPessoas, raiz);
+		mediaAnalise(cargo1, pSoma, pPessoas, raiz, 3);
 		std::cout << soma << " " << pessoas << std::endl;
 		media1 = soma/pessoas; //guarda o valor na variavel 
 //		std::cout << media1 << " " << pessoas << std::endl;
 		*pPessoas = 0, *pSoma = 0.0; //reseta os valores
 		//media cargo 2
-		analise1(cargo2, pSoma, pPessoas, raiz);
+		mediaAnalise(cargo2, pSoma, pPessoas, raiz, 3);
 //		std::cout << soma << " " << pessoas << std::endl;
 		media2 = soma/pessoas; //guarda o valor na varivael
 		
 		//Max e Min para cargo1
-		findMaxAnalise1(cargo1, pMaximo1, raiz);
+		findMaxAnalise(cargo1, pMaximo1, raiz, 3, nullptr);
 		minimo1 = maximo1;
-		findMinAnalise1(cargo1, pMinimo1, raiz);
+		findMinAnalise(cargo1, pMinimo1, raiz, 3, nullptr);
 		 
 		//Max e Min para cargo2 
-		findMaxAnalise1(cargo2, pMaximo2, raiz);
+		findMaxAnalise(cargo2, pMaximo2, raiz, 3, nullptr);
 		minimo2 = maximo2;
-		findMinAnalise1(cargo2, pMinimo2, raiz);
+		findMinAnalise(cargo2, pMinimo2, raiz, 3, nullptr);
 		
 		//print e resultado
 		std::cout << "--------- Media ---------\n";
@@ -318,3 +354,78 @@ No* ArvoreBST::excluir(No* t, std::string key){
 		std::cout << "relacao de maximo entre cargo1 e cargo2 em porcentagem: " << ((minimo2-minimo1)/minimo1)*100 << std::endl;
 	}
     
+    void ArvoreBST::auxAnalise2(std::string unidade1, std::string unidade2){
+		float soma = 0, *pSoma = &soma, media1 = 0, media2 = 0;
+		float maximo1 = 0, *pMaximo1 = &maximo1, minimo1, *pMinimo1 = &minimo1;
+		float maximo2 = 0, *pMaximo2 = &maximo2, minimo2, *pMinimo2 = &minimo2;
+		int pessoas = 0, *pPessoas = &pessoas;
+		
+		//media cargo 1
+		mediaAnalise(unidade1, pSoma, pPessoas, raiz, 4);
+		std::cout << soma << " " << pessoas << std::endl;
+		media1 = soma/pessoas; //guarda o valor na variavel 
+//		std::cout << media1 << " " << pessoas << std::endl;
+		*pPessoas = 0, *pSoma = 0.0; //reseta os valores
+		//media cargo 2
+		mediaAnalise(unidade2, pSoma, pPessoas, raiz, 4);
+//		std::cout << soma << " " << pessoas << std::endl;
+		media2 = soma/pessoas; //guarda o valor na varivael
+		
+		//Max e Min para cargo1
+		findMaxAnalise(unidade1, pMaximo1, raiz, 4, nullptr);
+		minimo1 = maximo1;
+		findMinAnalise(unidade1, pMinimo1, raiz, 4, nullptr);
+		 
+		//Max e Min para cargo2 
+		findMaxAnalise(unidade2, pMaximo2, raiz, 4, nullptr);
+		minimo2 = maximo2;
+		findMinAnalise(unidade2, pMinimo2, raiz, 4, nullptr);
+		
+		//print e resultado
+		std::cout << "--------- Media ---------\n";
+		std::cout << "media unidade 1: " << media1 << " media unidade 2: " << media2 << std::endl;
+		std::cout << "diferenca entre unidade1 e unidade2: " << (media2-media1) << std::endl;
+		std::cout << "relacao de media entre unidade1 e unidade2 em porcentagem: " << ((media2-media1)/media1)*100 << std::endl;
+		std::cout << "--------- MAX ----------\n";
+		std::cout << "maximo unidade 1: " << maximo1 << " maximo unidade 2: " << maximo2 << std::endl;
+		std::cout << "diferenca entre unidade1 e unidade 2: " << (maximo2-maximo1) << std::endl;
+		std::cout << "relacao de maximo entre unidade 1 e unidade 2 em porcentagem: " << ((maximo2-maximo1)/maximo1)*100 << std::endl;
+		std::cout << "--------- MIN ----------\n";
+		std::cout << "minimo unidade 1: " << minimo1 << " minimo unidade 2: " << minimo2 << std::endl;
+		std::cout << "diferenca entre unidade 1 e unidade 2: " << (minimo2-minimo1) << std::endl;
+		std::cout << "relacao de maximo entre unidade 1 e unidade 2 em porcentagem: " << ((minimo2-minimo1)/minimo1)*100 << std::endl;
+	}
+	
+	void ArvoreBST::auxAnalise3(){
+		float soma = 0, *pSoma = &soma, media1 = 0;
+		float maximo1 = 0, *pMaximo1 = &maximo1, minimo1, *pMinimo1 = &minimo1;
+		int pessoas = 0, *pPessoas = &pessoas;
+		No* noMaximo = nullptr;
+		No* noMinimo = nullptr;
+		
+		//media
+		mediaAnalise("", pSoma, pPessoas, raiz, 5);
+		std::cout << soma << " " << pessoas << std::endl;
+		media1 = soma/pessoas; //guarda o valor na variavel 
+		
+		//Max e Min
+		findMaxAnalise("", pMaximo1, raiz, 5, noMaximo);
+		minimo1 = maximo1;
+		findMinAnalise("", pMinimo1, raiz, 5, noMinimo);
+		std::cout << "terminamos";
+		std::cout << noMinimo->getPessoa()->getCargoBase() << std::endl;
+		std::cout << noMaximo->getChave() << std::endl;
+		//print e resultado
+//		std::cout << "--------- Media ---------\n";
+//		std::cout << "media unidade 1: " << media1 << " media unidade 2: " << media2 << std::endl;
+//		std::cout << "diferenca entre unidade1 e unidade2: " << (media2-media1) << std::endl;
+//		std::cout << "relacao de media entre unidade1 e unidade2 em porcentagem: " << ((media2-media1)/media1)*100 << std::endl;
+//		std::cout << "--------- MAX ----------\n";
+//		std::cout << "maximo unidade 1: " << maximo1 << " maximo unidade 2: " << maximo2 << std::endl;
+//		std::cout << "diferenca entre unidade1 e unidade 2: " << (maximo2-maximo1) << std::endl;
+//		std::cout << "relacao de maximo entre unidade 1 e unidade 2 em porcentagem: " << ((maximo2-maximo1)/maximo1)*100 << std::endl;
+//		std::cout << "--------- MIN ----------\n";
+//		std::cout << "minimo unidade 1: " << minimo1 << " minimo unidade 2: " << minimo2 << std::endl;
+//		std::cout << "diferenca entre unidade 1 e unidade 2: " << (minimo2-minimo1) << std::endl;
+//		std::cout << "relacao de maximo entre unidade 1 e unidade 2 em porcentagem: " << ((minimo2-minimo1)/minimo1)*100 << std::endl;
+	}

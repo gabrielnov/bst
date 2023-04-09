@@ -35,10 +35,12 @@ public:
     void infs(No* r);
     void print();
 	void print(No *no, int space);
-    void analise1(std::string procurar, float *soma, int* pessoas, No *no);
-    void findMaxAnalise1(std::string procurar, float *maximo, No* no);
-	void findMinAnalise1(std::string procurar, float *minimo, No* no);
+    void mediaAnalise(std::string procurar, float *soma, int* pessoas, No *no, int choice);
+    void findMaxAnalise(std::string procurar, float *maximo, No* no, int choice, No* noMaximo);
+    void findMinAnalise(std::string procurar, float *minimo, No* no, int choice, No* noMinimo);
     void auxAnalise1(std::string cargo1, std::string cargo2);
+    void auxAnalise2(std::string unidade1, std::string unidade2);
+    void auxAnalise3();
 };
 
 

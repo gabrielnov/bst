@@ -53,10 +53,14 @@ bool readOption(char opt, ArvoreBST* bst, bool* fileRead){
 				bst->auxAnalise1(cargo1, cargo2);
 				break;
 			case '4':
-				
-				
+				std::cin.ignore();
+				std::cout << "unidade1 "; std::getline(std::cin, unidade1);
+				std::cout << "unidade2 "; std::getline(std::cin, unidade2);
+				bst->auxAnalise2(unidade1, unidade2);
 				break;
 			case '5':
+				std::cin.ignore();
+				bst->auxAnalise3();
 				break;
 			case '6':
 				if (!*fileRead){

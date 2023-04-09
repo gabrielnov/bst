@@ -49,7 +49,7 @@ void ArvoreBST::emOrdem(No* no)
     if(no != NULL)
     {
         emOrdem(no->getEsq());
-        std::cout << no->getPessoa()->getSalarioBruto() << std::endl;
+        std::cout << no->getChave() << std::endl;
         emOrdem(no->getDir());
     }
 }

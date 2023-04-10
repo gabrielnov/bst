@@ -2,7 +2,7 @@
 
 void menu(ArvoreBST* bst){
 
-	char opt;
+	int opt;
 	bool exit = false;
 	bool* fileRead = new bool(false);
 	
@@ -31,45 +31,45 @@ void printMenu(){
 		<< "Digite a opcao: ";		
 }
 
-bool readOption(char opt, ArvoreBST* bst, bool* fileRead){
+bool readOption(int opt, ArvoreBST* bst, bool* fileRead){
 	std::string nome, cargo1, cargo2, unidade1, unidade2;
 	No *resp;
 	
 	switch(opt){
-			case '1':
+			case 1:
 				readFile(bst);
 				*fileRead = true;
 				break;
-			case '2':
+			case 2:
 				if (!*fileRead){
 					std::cout << "Necessario ler os dados primeiro (opcao 1)";
 					break;
 				}
 				break;
-			case '3':
+			case 3:
 				std::cin.ignore();
 				std::cout << "cargo1 "; std::getline(std::cin, cargo1);
 				std::cout << "cargo2 "; std::getline(std::cin, cargo2);
 				bst->auxAnalise1(cargo1, cargo2);
 				break;
-			case '4':
+			case 4:
 				std::cin.ignore();
 				std::cout << "unidade1 "; std::getline(std::cin, unidade1);
 				std::cout << "unidade2 "; std::getline(std::cin, unidade2);
 				bst->auxAnalise2(unidade1, unidade2);
 				break;
-			case '5':
+			case 5:
 				std::cin.ignore();
 				bst->auxAnalise3();
 				break;
-			case '6':
+			case 6:
 				if (!*fileRead){
 					std::cout << "Necessario ler os dados primeiro (opcao 1)" << std::endl;
 					break;
 				}
 				plot(bst);
 				break;
-			case '7':
+			case 7:
 				if (!*fileRead){
 					std::cout << "Necessario ler os dados primeiro (opcao 1)" << std::endl;
 					break;
@@ -87,17 +87,21 @@ bool readOption(char opt, ArvoreBST* bst, bool* fileRead){
 
 				break;
 
-			case '8':
+			case 8:
 				if (!*fileRead){
 					std::cout << "Necessario ler os dados primeiro (opcao 1) " << std::endl;
 					break;
 				}
 				saveFile(bst);
 				break;
-			case '9':
+			case 9:
 				std::cout << "Encerrando programa..."<< std::endl;
 				return true;
-			case '0':
+			case 10:
+				bst->auxLimpar();
+				bst->print();
+				break;
+			case 0:
 				std::cout << "!!! Imprimindo dados. Boa sorte !!! " << std::endl;
 				bst->print();
 

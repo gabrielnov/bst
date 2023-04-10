@@ -49,7 +49,7 @@ void ArvoreBST::emOrdem(No* no)
     if(no != NULL)
     {
         emOrdem(no->getEsq());
-        std::cout << no->getPessoa()->getSalarioBruto() << std::endl;
+        std::cout << no->getChave() << std::endl;
         emOrdem(no->getDir());
     }
 }
@@ -82,6 +82,21 @@ No* ArvoreBST::Pesquisar (No* r, std::string k)
         return Pesquisar(r->getEsq(), k);
     else
         return Pesquisar(r->getDir(), k);
+}
+
+void ArvoreBST::LimparArvore (No* no)
+{
+    if(no != NULL){
+    	LimparArvore(no->getEsq());
+    	LimparArvore(no->getDir());
+    	delete no;
+    	no = NULL;
+	}
+}
+
+void ArvoreBST::auxLimpar(){
+	LimparArvore(raiz);
+	raiz = NULL;
 }
 
 int ArvoreBST::contarNos(No* atual)
@@ -214,8 +229,8 @@ No* ArvoreBST::excluir(No* t, std::string key){
     		print(no->getDir(), space + 5);
     		for (int k = 0; k < space; ++k) 
 				std::cout << " ";
-//    		std::cout << no->getChave() << "\n";
-    		std::cout << no->getPessoa()->getSalarioBruto() << "\n";
+    		std::cout << no->getChave() << "\n";
+//    		std::cout << no->getPessoa()->getSalarioBruto() << "\n";
     		print(no->getEsq(), space + 5);
   		}
 	}
@@ -278,7 +293,10 @@ No* ArvoreBST::excluir(No* t, std::string key){
 			} else if (choice == 5){
 				if(no->getPessoa()->getSalarioBruto() > *maximo){
   					*maximo = no->getPessoa()->getSalarioBruto();
-  					noMaximo = no;
+  					noMaximo->getPessoa()->setCargoBase(no->getPessoa()->getCargoBase());
+  					noMaximo->getPessoa()->setCargoComissao(no->getPessoa()->getCargoComissao());
+  					noMaximo->getPessoa()->setSalarioBruto(no->getPessoa()->getSalarioBruto());
+  					noMaximo->getPessoa()->setUnidade(no->getPessoa()->getUnidade());
 				}
 			}
     		findMaxAnalise(procurar, maximo, no->getDir(), choice, noMaximo);
@@ -304,7 +322,10 @@ No* ArvoreBST::excluir(No* t, std::string key){
 			} else if (choice == 5){
 				if(no->getPessoa()->getSalarioBruto() < *minimo){
   					*minimo = no->getPessoa()->getSalarioBruto();
-  					noMinimo = no;
+  					noMinimo->getPessoa()->setCargoBase(no->getPessoa()->getCargoBase());
+  					noMinimo->getPessoa()->setCargoComissao(no->getPessoa()->getCargoComissao());
+  					noMinimo->getPessoa()->setSalarioBruto(no->getPessoa()->getSalarioBruto());
+  					noMinimo->getPessoa()->setUnidade(no->getPessoa()->getUnidade());
 				}
 			}
     		findMinAnalise(procurar, minimo, no->getDir(), choice, noMinimo);
@@ -400,34 +421,35 @@ No* ArvoreBST::excluir(No* t, std::string key){
 		float soma = 0, *pSoma = &soma, media1 = 0;
 		float maximo1 = 0, *pMaximo1 = &maximo1, minimo1, *pMinimo1 = &minimo1;
 		int pessoas = 0, *pPessoas = &pessoas;
-		No* noMaximo = nullptr;
-		No* noMinimo = nullptr;
+		No* noMaximo = new No();
+		No* noMinimo = new No();
 		
 		//media
 		mediaAnalise("", pSoma, pPessoas, raiz, 5);
-		std::cout << soma << " " << pessoas << std::endl;
 		media1 = soma/pessoas; //guarda o valor na variavel 
 		
 		//Max e Min
 		findMaxAnalise("", pMaximo1, raiz, 5, noMaximo);
 		minimo1 = maximo1;
 		findMinAnalise("", pMinimo1, raiz, 5, noMinimo);
-		std::cout << "terminamos";
-		std::cout << noMinimo->getPessoa()->getCargoBase() << std::endl;
-		std::cout << noMaximo->getChave() << std::endl;
+
 		//print e resultado
-//		std::cout << "--------- Media ---------\n";
-//		std::cout << "media unidade 1: " << media1 << " media unidade 2: " << media2 << std::endl;
-//		std::cout << "diferenca entre unidade1 e unidade2: " << (media2-media1) << std::endl;
-//		std::cout << "relacao de media entre unidade1 e unidade2 em porcentagem: " << ((media2-media1)/media1)*100 << std::endl;
-//		std::cout << "--------- MAX ----------\n";
-//		std::cout << "maximo unidade 1: " << maximo1 << " maximo unidade 2: " << maximo2 << std::endl;
-//		std::cout << "diferenca entre unidade1 e unidade 2: " << (maximo2-maximo1) << std::endl;
-//		std::cout << "relacao de maximo entre unidade 1 e unidade 2 em porcentagem: " << ((maximo2-maximo1)/maximo1)*100 << std::endl;
-//		std::cout << "--------- MIN ----------\n";
-//		std::cout << "minimo unidade 1: " << minimo1 << " minimo unidade 2: " << minimo2 << std::endl;
-//		std::cout << "diferenca entre unidade 1 e unidade 2: " << (minimo2-minimo1) << std::endl;
-//		std::cout << "relacao de maximo entre unidade 1 e unidade 2 em porcentagem: " << ((minimo2-minimo1)/minimo1)*100 << std::endl;
+		std::cout << "--------- Media Geral ---------\n";
+		std::cout << "soma geral: " << soma << "/ quantidade: " << pessoas << std::endl;
+		std::cout << "media geral: " << media1 << std::endl;
+		std::cout << "---------- MAX Geral ----------\n";
+		std::cout << "maximo da arvore: " << maximo1 << std::endl;
+		std::cout << "unidade: " << noMaximo->getPessoa()->getUnidade() << "/ cargo base: " << noMaximo->getPessoa()->getCargoBase() << "/ cargo commisao: " << noMaximo->getPessoa()->getCargoComissao() << std::endl;
+		std::cout << "diferenca entre maximo e media: " << (maximo1-media1) << std::endl;
+		std::cout << "diferenca entre maximo e media geral em porcentagem: " << ((maximo1-media1)/maximo1)*100 << std::endl;
+		std::cout << "---------- MIN Geral ----------\n";
+		std::cout << "minimo da arvore: " << minimo1 << std::endl;
+		std::cout << "unidade: " << noMinimo->getPessoa()->getUnidade() << "/ cargo base: " << noMinimo->getPessoa()->getCargoBase() << "/ cargo commisao: " << noMinimo->getPessoa()->getCargoComissao() << std::endl;
+		std::cout << "diferenca entre minimo e media: " << (media1-minimo1) << std::endl;
+		std::cout << "diferenca entre media geral e minimo em porcentagem: " << ((media1-minimo1)/media1)*100 << std::endl;
+		std::cout << "----------- MIN/MAX -----------\n";
+		std::cout << "diferenca entre maximo e minimo: " << (maximo1-minimo1) << std::endl;
+		std::cout << "diferenca entre maximo e minimo em porcentagem: " << ((maximo1-minimo1)/maximo1)*100 << std::endl;
 	}
 
     void ArvoreBST::analise4(No* no, struct faixaSalarial *fs, int *total){

@@ -7,6 +7,7 @@
 
 void menu(ArvoreBST* bst);
 void printMenu();
-bool readOption(char opt, ArvoreBST* bst, bool* fileRead);
+bool readOption(int opt, ArvoreBST* bst, bool* fileRead);
 
 #endif
+

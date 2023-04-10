@@ -2,7 +2,7 @@
 
 void readFile(ArvoreBST *bst){
     // TODO limpar a arvore antes de ler
-	std::string nome, cargo, unidade, caminho;
+	std::string nome, cargoBase, cargoComissao, unidade, caminho;
     float salarioBruto;
 
 	std::cout << "Informe o caminho do arquivo a ser lido: ";
@@ -32,10 +32,14 @@ void readFile(ArvoreBST *bst){
 	    	substring(line, stringArray);
 			
 			nome = stringArray[1];
-			cargo = stringArray[2];
+			cargoBase = stringArray[2];
+			cargoComissao = stringArray[3];
 			
-			if (cargo == " "){
-				cargo = "sem cargo base";
+			if (cargoBase == " "){
+				cargoBase = "sem cargo base";
+			}
+			if (cargoComissao == " "){
+				cargoComissao = "sem cargo base";
 			}
 
 			//algumas linhas possuem o valor em branco ou inválido, isso causa exceção na conversão
@@ -48,7 +52,7 @@ void readFile(ArvoreBST *bst){
 			
 			unidade = stringArray[7];
 
-	    	Pessoa * p = new Pessoa(cargo, unidade, salarioBruto);
+	    	Pessoa * p = new Pessoa(cargoBase, cargoComissao, unidade, salarioBruto);
 	    	
 			bst->inserir(nome, p);
 	    }
@@ -86,7 +90,8 @@ void escreverLinha(No* no, std::fstream *f)
         escreverLinha(no->getEsq(), f);
         
 		*f << no->getChave() << ";"
-		<< no->getPessoa()->getCargo() << ";"
+		<< no->getPessoa()->getCargoBase() << ";"
+		<< no->getPessoa()->getCargoComissao() << ";"
 		<< no->getPessoa()->getSalarioBruto() << ";"
 		<< no->getPessoa()->getUnidade() << "\n";
 		

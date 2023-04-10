@@ -5,23 +5,32 @@
 
 class Pessoa{
     private:
-        std::string cargo;
+        std::string cargoBase;
+        std::string cargoComissao;
         std::string unidade;
         float salarioBruto;
     
     public:
         ~Pessoa();
-        Pessoa();
-        Pessoa(std::string cargo, std::string unidade, float salarioBruto){
-            this->cargo = cargo;
+        Pessoa(){
+        	this->cargoBase = " ";
+        	this->cargoComissao = " ";
+        	this->unidade = " ";
+        	this->salarioBruto = 0.0;
+		};
+        Pessoa(std::string cargoBase, std::string cargoComissao, std::string unidade, float salarioBruto){
+            this->cargoBase = cargoBase;
+            this->cargoComissao = cargoComissao;
             this->unidade = unidade;
             this->salarioBruto = salarioBruto;
         }
         
-        std::string getCargo(){return cargo;}
+        std::string getCargoBase(){return cargoBase;}
+        std::string getCargoComissao(){return cargoComissao;}
         std::string getUnidade(){return unidade;}
         float getSalarioBruto(){return salarioBruto;}
-        void setCargo(std::string cargo){this->cargo = cargo;}
+        void setCargoBase(std::string cargoBase){this->cargoBase = cargoBase;}
+        void setCargoComissao(std::string cargoComissao){this->cargoComissao = cargoComissao;}
         void setUnidade(std::string unidade){this->unidade = unidade;}
         void setSalarioBruto(float salarioBruto){this->salarioBruto = salarioBruto;}
 };

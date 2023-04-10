@@ -429,3 +429,66 @@ No* ArvoreBST::excluir(No* t, std::string key){
 //		std::cout << "diferenca entre unidade 1 e unidade 2: " << (minimo2-minimo1) << std::endl;
 //		std::cout << "relacao de maximo entre unidade 1 e unidade 2 em porcentagem: " << ((minimo2-minimo1)/minimo1)*100 << std::endl;
 	}
+
+    void ArvoreBST::analise4(No* no, struct faixaSalarial *fs, int *total){
+        if(no != NULL){
+            analise4(no->getEsq(), fs, total);
+            analise4(no->getDir(), fs, total);
+            
+            float salario = no->getPessoa()->getSalarioBruto();
+
+            (*total)++;
+            if (salario < 5.0){
+                fs->A++;
+            }
+            else if(salario <=10.0){
+                fs->B++;
+            }
+            else if(salario <=15.0){
+                fs->C++;
+            }
+            else if(salario <=20.0){
+                fs->D++;
+            }
+            else {
+                fs->E++;
+            }
+        }
+    }
+
+    void ArvoreBST::analise5(No* no, std::string nome){
+        No *result = Pesquisar(getRaiz(), nome);
+
+        if (result == NULL){
+        std::cout << "!!! Funcionario nao encontrado !!!" << std::endl;
+          return;
+        }
+        
+        std::cout << "Dados do funcionario:" << std::endl;
+        std::cout << "Nome: " << result->getChave() << std::endl;
+        std::cout << "Cargo base: " << result->getPessoa()->getCargoBase() << std::endl;
+        std::cout << "Cargo em comissao: " << result->getPessoa()->getCargoComissao() << std::endl;
+        std::cout << "Unidade: " << result->getPessoa()->getUnidade() << std::endl;
+        std::cout << "Salario bruto: " << result->getPessoa()->getSalarioBruto() << std::endl;
+
+        float soma = 0, *pSoma = &soma, media = 0, prop;
+		int pessoas = 0, *pPessoas = &pessoas;
+	
+		mediaAnalise("", pSoma, pPessoas, raiz, 5);
+		media = soma/pessoas; 
+		
+        prop = result->getPessoa()->getSalarioBruto() * 100 / media;
+
+        std::cout << "Media salarial: " << result->getPessoa()->getSalarioBruto() << std::endl;
+        std::cout << "O salario de " << nome << " eh ";
+
+        if (prop > 100){
+            std::cout << prop - 100 << " maior que a media" << std::endl;
+            return;
+        }
+       
+        std::cout << 100 - prop << " menor que a media" << std::endl;
+        
+    }
+
+

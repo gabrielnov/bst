@@ -30,4 +30,10 @@ class Pessoa{
         void setSalarioBruto(float salarioBruto){this->salarioBruto = salarioBruto;}
 };
 
+
+struct faixaSalarial {
+    int A, B, C, D, E;
+};
+
+
 #endif

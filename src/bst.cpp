@@ -89,8 +89,8 @@ void ArvoreBST::LimparArvore (No* no)
     if(no != NULL){
     	LimparArvore(no->getEsq());
     	LimparArvore(no->getDir());
-    	std::cout << no->getChave() << std::endl;
     	delete no;
+    	no = NULL;
 	}
 }
 

@@ -41,6 +41,8 @@ public:
     void auxAnalise1(std::string cargo1, std::string cargo2);
     void auxAnalise2(std::string unidade1, std::string unidade2);
     void auxAnalise3();
+    void LimparArvore (No* no);
+    void auxLimpar();
 };
 
 

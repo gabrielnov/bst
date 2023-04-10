@@ -84,6 +84,21 @@ No* ArvoreBST::Pesquisar (No* r, std::string k)
         return Pesquisar(r->getDir(), k);
 }
 
+void ArvoreBST::LimparArvore (No* no)
+{
+    if(no != NULL){
+    	LimparArvore(no->getEsq());
+    	LimparArvore(no->getDir());
+    	std::cout << no->getChave() << std::endl;
+    	delete no;
+	}
+}
+
+void ArvoreBST::auxLimpar(){
+	LimparArvore(raiz);
+	raiz = NULL;
+}
+
 int ArvoreBST::contarNos(No* atual)
 {
     if(atual == NULL)  return 0;

@@ -67,6 +67,7 @@ bool readOption(int opt, ArvoreBST* bst, bool* fileRead){
 					std::cout << "Necessario ler os dados primeiro (opcao 1)" << std::endl;
 					break;
 				}
+				plot(bst);
 				break;
 			case 7:
 				if (!*fileRead){

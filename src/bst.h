@@ -34,13 +34,15 @@ public:
     No* findMax(No* t);
     void infs(No* r);
     void print();
-	void print(No *no, int space);
+  	void print(No *no, int space);
     void mediaAnalise(std::string procurar, float *soma, int* pessoas, No *no, int choice);
     void findMaxAnalise(std::string procurar, float *maximo, No* no, int choice, No* noMaximo);
     void findMinAnalise(std::string procurar, float *minimo, No* no, int choice, No* noMinimo);
     void auxAnalise1(std::string cargo1, std::string cargo2);
     void auxAnalise2(std::string unidade1, std::string unidade2);
     void auxAnalise3();
+    void analise4(No *no, struct faixaSalarial *fs, int *total);
+    void analise5(No* no, std::string nome);
     void LimparArvore (No* no);
     void auxLimpar();
 };

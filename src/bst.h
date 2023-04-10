@@ -2,6 +2,7 @@
 #define __BST_H__
 
 #include <iostream>
+#include <iomanip>
 #include <limits>
 #include "pessoa.h"
 #include "node.h"

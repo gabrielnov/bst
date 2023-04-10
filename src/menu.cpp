@@ -17,7 +17,7 @@ void menu(ArvoreBST* bst){
 }
 
 void printMenu(){
-		std::cout << "\n"
+		std::cout << "\n\n"
         << "[1] Ler dados\n"	
 		<< "[2] Analise de dados A\n"
 		<< "[3] Analise de dados B\n"
@@ -45,29 +45,45 @@ bool readOption(int opt, ArvoreBST* bst, bool* fileRead){
 					std::cout << "Necessario ler os dados primeiro (opcao 1)";
 					break;
 				}
-				break;
-			case 3:
 				std::cin.ignore();
 				std::cout << "cargo1 "; std::getline(std::cin, cargo1);
 				std::cout << "cargo2 "; std::getline(std::cin, cargo2);
 				bst->auxAnalise1(cargo1, cargo2);
 				break;
-			case 4:
+			case 3:
+			if (!*fileRead){
+					std::cout << "Necessario ler os dados primeiro (opcao 1)";
+					break;
+				}
 				std::cin.ignore();
 				std::cout << "unidade1 "; std::getline(std::cin, unidade1);
 				std::cout << "unidade2 "; std::getline(std::cin, unidade2);
 				bst->auxAnalise2(unidade1, unidade2);
 				break;
-			case 5:
+			case 4:
+				if (!*fileRead){
+					std::cout << "Necessario ler os dados primeiro (opcao 1)";
+					break;
+				}
 				std::cin.ignore();
 				bst->auxAnalise3();
+				break;
+			case 5:
+				if (!*fileRead){
+					std::cout << "Necessario ler os dados primeiro (opcao 1)";
+					break;
+				}
+				plot(bst);
 				break;
 			case 6:
 				if (!*fileRead){
 					std::cout << "Necessario ler os dados primeiro (opcao 1)" << std::endl;
 					break;
 				}
-				plot(bst);
+				std::cin.ignore(256, '\n'); 
+				std::cout << "Insira o nome do funcionario a ser analisado: ";
+                std::getline(std::cin, nome);
+				bst->analise5(bst->getRaiz(), nome);
 				break;
 			case 7:
 				if (!*fileRead){

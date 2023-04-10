@@ -486,12 +486,12 @@ No* ArvoreBST::excluir(No* t, std::string key){
           return;
         }
         
-        std::cout << "Dados do funcionario:" << std::endl;
+        std::cout << "\nDados do funcionario:" << std::endl;
         std::cout << "Nome: " << result->getChave() << std::endl;
         std::cout << "Cargo base: " << result->getPessoa()->getCargoBase() << std::endl;
         std::cout << "Cargo em comissao: " << result->getPessoa()->getCargoComissao() << std::endl;
         std::cout << "Unidade: " << result->getPessoa()->getUnidade() << std::endl;
-        std::cout << "Salario bruto: " << result->getPessoa()->getSalarioBruto() << std::endl;
+        std::cout << "Salario bruto: " << std::fixed << std::setprecision(3) << result->getPessoa()->getSalarioBruto() << std::endl;
 
         float soma = 0, *pSoma = &soma, media = 0, prop;
 		int pessoas = 0, *pPessoas = &pessoas;
@@ -501,16 +501,17 @@ No* ArvoreBST::excluir(No* t, std::string key){
 		
         prop = result->getPessoa()->getSalarioBruto() * 100 / media;
 
-        std::cout << "Media salarial: " << result->getPessoa()->getSalarioBruto() << std::endl;
-        std::cout << "O salario de " << nome << " eh ";
+        std::cout << "\nO salario de " << nome << " eh ";
 
         if (prop > 100){
-            std::cout << prop - 100 << " maior que a media" << std::endl;
-            return;
+            std::cout << std::fixed << std::setprecision(1) << prop - 100 << " maior que a media" << std::endl;
+        }else{
+            std::cout  << std::fixed << std::setprecision(1) << 100 - prop << " menor que a media" << std::endl;
         }
        
-        std::cout << 100 - prop << " menor que a media" << std::endl;
         
+        
+        std::cout << "\nMedia salarial: " << std::fixed << std::setprecision(3) << media << std::endl;
     }
 
 

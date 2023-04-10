@@ -2,6 +2,7 @@
 #define __BST_H__
 
 #include <iostream>
+#include <iomanip>
 #include <limits>
 #include "pessoa.h"
 #include "node.h"
@@ -41,8 +42,8 @@ public:
     void auxAnalise1(std::string cargo1, std::string cargo2);
     void auxAnalise2(std::string unidade1, std::string unidade2);
     void auxAnalise3();
-    void analise4(No *no, struct faixaSalarial *fs, int *total);
-    void analise5(No* no, std::string nome);
+    void analise4(No* no, std::string nome);
+    void analise5(No *no, struct faixaSalarial *fs, int *total);
     void LimparArvore (No* no);
     void auxLimpar();
 };

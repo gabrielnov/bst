@@ -1,7 +1,6 @@
 #include "file.h"
 
 void readFile(ArvoreBST *bst){
-    // TODO limpar a arvore antes de ler
 	std::string nome, cargoBase, cargoComissao, unidade, caminho;
     float salarioBruto;
 
@@ -39,7 +38,7 @@ void readFile(ArvoreBST *bst){
 				cargoBase = "sem cargo base";
 			}
 			if (cargoComissao == " "){
-				cargoComissao = "sem cargo base";
+				cargoComissao = "sem cargo comissionado";
 			}
 
 			//algumas linhas possuem o valor em branco ou inválido, isso causa exceção na conversão

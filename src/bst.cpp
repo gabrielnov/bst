@@ -312,8 +312,8 @@ No* ArvoreBST::excluir(No* t, std::string key){
   			if(choice == 3){
   				if(no->getPessoa()->getCargoBase() == procurar || no->getPessoa()->getCargoComissao() == procurar){
   					if(no->getPessoa()->getSalarioBruto() <= *minimo && no->getPessoa()->getSalarioBruto() != 0.0){
-  						std::cout << *minimo << " ";
-  						std::cout << no->getChave() << " " << no->getPessoa()->getSalarioBruto() << std::endl;
+//  						std::cout << *minimo << " ";
+//  						std::cout << no->getChave() << " " << no->getPessoa()->getSalarioBruto() << std::endl;
   						*minimo = no->getPessoa()->getSalarioBruto();
 					}
 				}	

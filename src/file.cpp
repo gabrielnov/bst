@@ -43,6 +43,8 @@ void readFile(ArvoreBST *bst){
 
 			//algumas linhas possuem o valor em branco ou inválido, isso causa exceção na conversão
 			try{
+				stringArray[6].erase(std::remove(stringArray[6].begin(), stringArray[6].end(), '.'), stringArray[6].end());
+				std::replace(stringArray[6].begin(), stringArray[6].end(), ',', '.');
 				salarioBruto = std::stof(stringArray[6]);
 			} 
 			catch( ... ){

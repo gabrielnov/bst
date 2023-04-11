@@ -2,6 +2,7 @@
 #define __FILE_H__
 
 #include <fstream>
+#include <algorithm>
 #include "bst.h"
 #include "node.h"
 #include "pessoa.h"

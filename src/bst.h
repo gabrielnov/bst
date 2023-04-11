@@ -4,6 +4,7 @@
 #include <iostream>
 #include <iomanip>
 #include <limits>
+#include <cmath>
 #include "pessoa.h"
 #include "node.h"
 

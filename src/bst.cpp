@@ -267,6 +267,7 @@ No* ArvoreBST::excluir(No* t, std::string key){
   					*pessoas += 1;
 				}
 			} else if (choice == 5){
+//				std::cout << no->getChave() << " " << *soma << " " << *pessoas << std::endl;
 				*soma = *soma + no->getPessoa()->getSalarioBruto();
   				*pessoas += 1;
 			}
@@ -338,7 +339,7 @@ No* ArvoreBST::excluir(No* t, std::string key){
 	}
 	
 	void ArvoreBST::auxAnalise1(std::string cargo1, std::string cargo2){
-		float soma = 0, *pSoma = &soma, media1 = 0, media2 = 0;
+		float soma = 0, *pSoma = &soma, media1 = 0, media2 = 0, temp = 0;
 		float maximo1 = 0, *pMaximo1 = &maximo1, minimo1, *pMinimo1 = &minimo1;
 		float maximo2 = 0, *pMaximo2 = &maximo2, minimo2, *pMinimo2 = &minimo2;
 		int pessoas = 0, *pPessoas = &pessoas;
@@ -368,24 +369,23 @@ No* ArvoreBST::excluir(No* t, std::string key){
 		
 		//print e resultado
 		std::cout << "\n--------- Media ---------\n";
-		std::cout << "Media do primeiro cargo: R$" << media1 << " | Media do segundo cargo: R$" << media2 << std::endl;
-		std::cout << "Diferenca entre os dois cargos: R$" << (media2-media1) << std::endl;
-		std::cout << "Relacao de media entre os dois cargos: "
-		<< std::fixed << std::setprecision(2) << ((media2-media1)/media1)*100 << "%" << std::endl;
+
+		std::cout << "Media do primeiro cargo: " << media1 << " | Media do segundo cargo: " << media2 << std::endl;
+		std::cout << "Diferenca entre os dois cargos: " << (media2-media1) << std::endl;
+		std::cout << "Diferenca Percentual de media entre os dois cargos: " << (abs(media2-media1)/((media2+media1)/2))*100 << "%" << std::endl;
 		std::cout << "--------- MAX ----------\n";
 		std::cout << "Maximo do primeiro cargo: " << maximo1 << " | Maximo do segundo cargo: " << maximo2 << std::endl;
-		std::cout << "Diferenca entre os dois cargos: R$" << (maximo2-maximo1) << std::endl;
-		std::cout << "Relacao de maximo entre os dois cargos: "
-		<< std::fixed << std::setprecision(2) << ((maximo2-maximo1)/maximo1)*100 << "%" << std::endl;
+		std::cout << "Diferenca entre os dois cargos: " << (maximo2-maximo1) << std::endl;
+		std::cout << "Diferenca Percentual de maximo entre os dois cargos: " << (abs(maximo2-maximo1)/((maximo2+maximo1)/2))*100 << "%" << std::endl;
 		std::cout << "--------- MIN ----------\n";
-		std::cout << "Minimo do primeiro cargo: R$" << minimo1 << " | Minimo do segundo cargo: R$" << minimo2 << std::endl;
-		std::cout << "Diferenca entre os dois cargos: R$" << (minimo2-minimo1) << std::endl;
-		std::cout << "Relacao de minimo entre os dois cargos: "
-		<< std::fixed << std::setprecision(2) << ((minimo2-minimo1)/minimo1)*100 << "%" << std::endl;
+		std::cout << "Minimo do primeiro cargo: " << minimo1 << " | Minimo do segundo cargo: " << minimo2 << std::endl;
+		std::cout << "Diferenca entre os dois cargos: " << (minimo2-minimo1) << std::endl;
+		std::cout << "Diferenca Percentual de minimo entre os dois cargos: " << (abs(minimo2-minimo1)/((minimo2+minimo1)/2))*100 << "%" << std::endl;
+
 	}
     
     void ArvoreBST::auxAnalise2(std::string unidade1, std::string unidade2){
-		float soma = 0, *pSoma = &soma, media1 = 0, media2 = 0;
+		float soma = 0, *pSoma = &soma, media1 = 0, media2 = 0, temp = 0;
 		float maximo1 = 0, *pMaximo1 = &maximo1, minimo1, *pMinimo1 = &minimo1;
 		float maximo2 = 0, *pMaximo2 = &maximo2, minimo2, *pMinimo2 = &minimo2;
 		int pessoas = 0, *pPessoas = &pessoas;
@@ -410,20 +410,19 @@ No* ArvoreBST::excluir(No* t, std::string key){
 		
 		//print e resultado
 		std::cout << "\n--------- Media ---------\n";
-		std::cout << "Media da primeira unidade: R$" << media1 << " | Media da segunda unidade: R$" << media2 << std::endl;
-		std::cout << "Diferenca entre as duas unidades: " << (media2-media1) << std::endl;
-		std::cout << "Relacao de media entre as duas unidades: " 
-		<< std::fixed << std::setprecision(2) << ((media2-media1)/media1)*100 << "%" << std::endl;
+
+		std::cout << "Media do primeiro cargo: " << media1 << " | Media do segundo cargo: " << media2 << std::endl;
+		std::cout << "Diferenca entre os dois cargos: " << (media2-media1) << std::endl;
+		std::cout << "Diferenca Percentual de media entre os dois cargos: " << (abs(media2-media1)/((media2+media1)/2))*100 << "%" << std::endl;
 		std::cout << "--------- MAX ----------\n";
-		std::cout << "Maximo da primeira unidade: R$" << maximo1 << " | Maximo da segunda unidade: R$" << maximo2 << std::endl;
-		std::cout << "Diferenca entre as duas unidades: " << (maximo2-maximo1) << std::endl;
-		std::cout << "Relacao de maximo entre as duas unidades: "
-		<< std::fixed << std::setprecision(2) << ((maximo2-maximo1)/maximo1)*100 << "%" << std::endl;
+		std::cout << "Maximo do primeiro cargo: " << maximo1 << " | Maximo do segundo cargo: " << maximo2 << std::endl;
+		std::cout << "Diferenca entre os dois cargos: " << (maximo2-maximo1) << std::endl;
+		std::cout << "Diferenca Percentual de maximo entre os dois cargos: " << (abs(maximo2-maximo1)/((maximo2+maximo1)/2))*100 << "%" << std::endl;
 		std::cout << "--------- MIN ----------\n";
-		std::cout << "Minimo da primeira unidade: R$" << minimo1 << " | Minimo da segunda unidade: R$" << minimo2 << std::endl;
-		std::cout << "Diferenca entre as duas unidades: " << (minimo2-minimo1) << std::endl;
-		std::cout << "Relacao de minimo entre as duas unidades: "
-		<< std::fixed << std::setprecision(2) << ((minimo2-minimo1)/minimo1)*100 << "%" << std::endl;
+		std::cout << "Minimo do primeiro cargo: " << minimo1 << " | Minimo do segundo cargo: " << minimo2 << std::endl;
+		std::cout << "Diferenca entre os dois cargos: " << (minimo2-minimo1) << std::endl;
+		std::cout << "Diferenca Percentual de minimo entre os dois cargos: " << (abs(minimo2-minimo1)/((minimo2+minimo1)/2))*100 << "%" << std::endl;
+
 	}
 	
 	void ArvoreBST::auxAnalise3(){
@@ -450,18 +449,16 @@ No* ArvoreBST::excluir(No* t, std::string key){
 		std::cout << "Maximo da arvore: " << maximo1 << std::endl;
 		std::cout << "Unidade: " << noMaximo->getPessoa()->getUnidade() << "/ Cargo base: " << noMaximo->getPessoa()->getCargoBase() << "/ cargo commisao: " << noMaximo->getPessoa()->getCargoComissao() << std::endl;
 		std::cout << "Diferenca entre maximo e media: " << (maximo1-media1) << std::endl;
-		std::cout << "Diferenca entre maximo e media geral em porcentagem: " 
-		<< std::fixed << std::setprecision(2) << ((maximo1-media1)/maximo1)*100 << "%" << std::endl;
+		std::cout << "Diferenca Percentual entre maximo e media geral: " << (abs(maximo1-media1)/((maximo1+media1)/2))*100 << "%" << std::endl;
 		std::cout << "---------- MIN Geral ----------\n";
 		std::cout << "Minimo da arvore: " << minimo1 << std::endl;
 		std::cout << "Unidade: " << noMinimo->getPessoa()->getUnidade() << "/ cargo base: " << noMinimo->getPessoa()->getCargoBase() << "/ cargo commisao: " << noMinimo->getPessoa()->getCargoComissao() << std::endl;
 		std::cout << "Diferenca entre minimo e media: " << (media1-minimo1) << std::endl;
-		std::cout << "Diferenca entre media geral e minimo em porcentagem: " 
-		<< std::fixed << std::setprecision(2) << ((media1-minimo1)/media1)*100 << "%" << std::endl;
+		std::cout << "Diferenca Percentual entre media geral e minimo: " << (abs(media1-minimo1)/((media1+minimo1)/2))*100 << "%" << std::endl;
 		std::cout << "----------- MIN/MAX -----------\n";
 		std::cout << "Diferenca entre maximo e minimo: " << (maximo1-minimo1) << std::endl;
-		std::cout << "Diferenca entre maximo e minimo em porcentagem: " 
-		<< std::fixed << std::setprecision(2) << ((maximo1-minimo1)/maximo1)*100 << "%" << std::endl;
+		std::cout << "Diferenca Percentual entre maximo e minimo: " << (abs(maximo1-minimo1)/((maximo1+minimo1)/2))*100 << "%" << std::endl;
+
 	}
 
 	// funcao usada para categorizar os funcionarios em faixas salariais usadas no histograma

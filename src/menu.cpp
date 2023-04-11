@@ -22,12 +22,12 @@ void printMenu(){
 		<< "[2] Analise A - Comparar cargos\n"
 		<< "[3] Analise B - Analise de unidades\n"
 		<< "[4] Analise C - Estatisticas gerais\n"
-		<< "[5] Analise D - Analise de funcionario\n"
+		<< "[5] Analise D - Analise de funcionario(a)\n"
 		<< "[6] Analise E - Distribuicao de salarios\n"
-		<< "[7] Remover funcionario\n"
+		<< "[7] Remover funcionario(a)\n"
 		<< "[8] Salvar dados\n"
-		<< "[9] Encerrar\n"
-		<< "[0] Imprimir dados (use com cautela)\n\n"
+		<< "[9] Limpar a arvore\n"
+		<< "[0] Encerrar\n\n"
 		<< "Digite a opcao: ";		
 }
 
@@ -74,7 +74,7 @@ bool readOption(int opt, ArvoreBST* bst, bool* fileRead){
 					break;
 				}
 				std::cin.ignore(256, '\n'); 
-				std::cout << "Insira o nome do funcionario a ser analisado: ";
+				std::cout << "Insira o nome do funcionario(a) a ser analisado: ";
                 std::getline(std::cin, nome);
 				bst->analise4(bst->getRaiz(), nome);
 				break;
@@ -91,7 +91,7 @@ bool readOption(int opt, ArvoreBST* bst, bool* fileRead){
 					break;
 				}
 				std::cin.ignore(256, '\n'); 
-				std::cout << "Insira o nome do funcionario a ser removido: ";
+				std::cout << "Insira o nome do(a) funcionario(a) a ser removido: ";
                 std::getline(std::cin, nome);
 
 				resp = bst->excluir(bst->getRaiz(), nome);
@@ -100,7 +100,8 @@ bool readOption(int opt, ArvoreBST* bst, bool* fileRead){
 
 				if (resp == NULL)
 					std::cout << "A arvore esta vazia!" << std::endl;
-
+				else
+					std::cout << "funcionario(a) " << nome << " removido(a) com sucesso!" << std::endl;
 				break;
 
 			case 8:
@@ -111,55 +112,19 @@ bool readOption(int opt, ArvoreBST* bst, bool* fileRead){
 				saveFile(bst);
 				break;
 			case 9:
-				std::cout << "Encerrando programa..."<< std::endl;
-				return true;
-			case 10:
+				if (!*fileRead){
+					std::cout << "Necessario ler os dados primeiro (opcao 1) " << std::endl;
+					break;
+				}
 				bst->auxLimpar();
-				bst->print();
+				std::cout << "Arvore limpa com sucesso!" << std::endl;
 				break;
 			case 0:
-				std::cout << "!!! Imprimindo dados. Boa sorte !!! " << std::endl;
-				bst->print();
-
-				break;
-			return true;
+				std::cout << "Encerrando programa..."<< std::endl;
+				return true;
+			
 			default:
 				std::cout << "Opcao invalida. Tenta novamente"<< std::endl;
 		}
 	return false;
 }
-
-// void lerFuncionario(ArvoreBST *bst){
-	
-// 	std::string nome, cargo, unidade, salarioBruto;
-//     float fSalarioBruto;
-//     bool salarioValido = false;
-
-// 	std::cout << " -- Informe os dados do novo funcionario -- " << std::endl;
-	
-//     std::cout << "Nome: ";
-//     std::cin >> nome;
-
-//     std::cout << "\nCargo: ";
-//     std::cin >> cargo;
-
-//     std::cout << "\nUnidade: ";
-//     std::cin >> nome;
-    
-//     while (!salarioValido){
-//         std::cout << "\nSalario bruto: ";
-//         std::cin >> salarioBruto;
-
-//         try{
-//             fSalarioBruto = std::stof(salarioBruto);
-//             salarioValido = true;
-//         }catch( ... ){
-//             std::cout << "\nSalario invalido, tente novamente!";
-//         }
-//     }
-    
-// 	Pessoa* p = new Pessoa(cargo, unidade, fSalarioBruto);
-	
-//     bst->inserir(nome, p);
-	
-// }

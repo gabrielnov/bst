@@ -369,6 +369,7 @@ No* ArvoreBST::excluir(No* t, std::string key){
 		
 		//print e resultado
 		std::cout << "\n--------- Media ---------\n";
+
 		std::cout << "Media do primeiro cargo: " << media1 << " | Media do segundo cargo: " << media2 << std::endl;
 		std::cout << "Diferenca entre os dois cargos: " << (media2-media1) << std::endl;
 		std::cout << "Diferenca Percentual de media entre os dois cargos: " << (abs(media2-media1)/((media2+media1)/2))*100 << "%" << std::endl;
@@ -380,6 +381,7 @@ No* ArvoreBST::excluir(No* t, std::string key){
 		std::cout << "Minimo do primeiro cargo: " << minimo1 << " | Minimo do segundo cargo: " << minimo2 << std::endl;
 		std::cout << "Diferenca entre os dois cargos: " << (minimo2-minimo1) << std::endl;
 		std::cout << "Diferenca Percentual de minimo entre os dois cargos: " << (abs(minimo2-minimo1)/((minimo2+minimo1)/2))*100 << "%" << std::endl;
+
 	}
     
     void ArvoreBST::auxAnalise2(std::string unidade1, std::string unidade2){
@@ -390,13 +392,10 @@ No* ArvoreBST::excluir(No* t, std::string key){
 		
 		//media cargo 1
 		mediaAnalise(unidade1, pSoma, pPessoas, raiz, 4);
-		std::cout << soma << " " << pessoas << std::endl;
 		media1 = soma/pessoas; //guarda o valor na variavel 
-//		std::cout << media1 << " " << pessoas << std::endl;
 		*pPessoas = 0, *pSoma = 0.0; //reseta os valores
 		//media cargo 2
 		mediaAnalise(unidade2, pSoma, pPessoas, raiz, 4);
-//		std::cout << soma << " " << pessoas << std::endl;
 		media2 = soma/pessoas; //guarda o valor na varivael
 		
 		//Max e Min para cargo1
@@ -411,6 +410,7 @@ No* ArvoreBST::excluir(No* t, std::string key){
 		
 		//print e resultado
 		std::cout << "\n--------- Media ---------\n";
+
 		std::cout << "Media do primeiro cargo: " << media1 << " | Media do segundo cargo: " << media2 << std::endl;
 		std::cout << "Diferenca entre os dois cargos: " << (media2-media1) << std::endl;
 		std::cout << "Diferenca Percentual de media entre os dois cargos: " << (abs(media2-media1)/((media2+media1)/2))*100 << "%" << std::endl;
@@ -422,6 +422,7 @@ No* ArvoreBST::excluir(No* t, std::string key){
 		std::cout << "Minimo do primeiro cargo: " << minimo1 << " | Minimo do segundo cargo: " << minimo2 << std::endl;
 		std::cout << "Diferenca entre os dois cargos: " << (minimo2-minimo1) << std::endl;
 		std::cout << "Diferenca Percentual de minimo entre os dois cargos: " << (abs(minimo2-minimo1)/((minimo2+minimo1)/2))*100 << "%" << std::endl;
+
 	}
 	
 	void ArvoreBST::auxAnalise3(){
@@ -442,8 +443,8 @@ No* ArvoreBST::excluir(No* t, std::string key){
 
 		//print e resultado
 		std::cout << "\n--------- Media Geral ---------\n";
-		std::cout << "Soma geral: " << soma << "/ quantidade: " << pessoas << std::endl;
-		std::cout << "Media geral: " << media1 << std::endl;
+		std::cout << "Soma geral: R$ " << soma << " / quantidade: " << pessoas << std::endl;
+		std::cout << "Media geral: R$ " << media1 << std::endl;
 		std::cout << "---------- MAX Geral ----------\n";
 		std::cout << "Maximo da arvore: " << maximo1 << std::endl;
 		std::cout << "Unidade: " << noMaximo->getPessoa()->getUnidade() << "/ Cargo base: " << noMaximo->getPessoa()->getCargoBase() << "/ cargo commisao: " << noMaximo->getPessoa()->getCargoComissao() << std::endl;
@@ -457,8 +458,10 @@ No* ArvoreBST::excluir(No* t, std::string key){
 		std::cout << "----------- MIN/MAX -----------\n";
 		std::cout << "Diferenca entre maximo e minimo: " << (maximo1-minimo1) << std::endl;
 		std::cout << "Diferenca Percentual entre maximo e minimo: " << (abs(maximo1-minimo1)/((maximo1+minimo1)/2))*100 << "%" << std::endl;
+
 	}
 
+	// funcao usada para categorizar os funcionarios em faixas salariais usadas no histograma
     void ArvoreBST::analise5(No* no, struct faixaSalarial *fs, int *total){
         if(no != NULL){
             analise5(no->getEsq(), fs, total);
@@ -467,16 +470,16 @@ No* ArvoreBST::excluir(No* t, std::string key){
             float salario = no->getPessoa()->getSalarioBruto();
 
             (*total)++;
-            if (salario < 5.0){
+            if (salario < 5000){
                 fs->A++;
             }
-            else if(salario <=10.0){
+            else if(salario <=10000){
                 fs->B++;
             }
-            else if(salario <=15.0){
+            else if(salario <=15000){
                 fs->C++;
             }
-            else if(salario <=20.0){
+            else if(salario <=20000){
                 fs->D++;
             }
             else {
@@ -486,23 +489,26 @@ No* ArvoreBST::excluir(No* t, std::string key){
     }
 
     void ArvoreBST::analise4(No* no, std::string nome){
+		// procuramos pela chave informada
         No *result = Pesquisar(getRaiz(), nome);
 
         if (result == NULL){
-        std::cout << "!!! Funcionario nao encontrado !!!" << std::endl;
-          return;
+        	std::cout << "!!! Funcionario(a) nao encontrado(a) !!!" << std::endl;
+          	return;
         }
         
-        std::cout << "\nDados do funcionario:" << std::endl;
+		// caso seja encontrada, imprimos os dados
+        std::cout << "\nDados do(a) funcionario(a):" << std::endl;
         std::cout << "Nome: " << result->getChave() << std::endl;
         std::cout << "Cargo base: " << result->getPessoa()->getCargoBase() << std::endl;
         std::cout << "Cargo em comissao: " << result->getPessoa()->getCargoComissao() << std::endl;
         std::cout << "Unidade: " << result->getPessoa()->getUnidade() << std::endl;
-        std::cout << "Salario bruto: R$" << std::fixed << std::setprecision(3) << result->getPessoa()->getSalarioBruto() << std::endl;
+        std::cout << "Salario bruto: R$" << std::fixed << std::setprecision(2) << result->getPessoa()->getSalarioBruto() << std::endl;
 
         float soma = 0, *pSoma = &soma, media = 0, prop;
 		int pessoas = 0, *pPessoas = &pessoas;
-	
+
+		// calculamos a media geral e posteriormente comparamos com a do funcionario buscado
 		mediaAnalise("", pSoma, pPessoas, raiz, 5);
 		media = soma/pessoas; 
 		
@@ -511,14 +517,12 @@ No* ArvoreBST::excluir(No* t, std::string key){
         std::cout << "\nO salario de " << nome << " eh ";
 
         if (prop > 100){
-            std::cout << std::fixed << std::setprecision(1) << prop - 100 << "% maior que a media" << std::endl;
+            std::cout << std::fixed << std::setprecision(2) << prop - 100 << "% maior que a media" << std::endl;
         }else{
-            std::cout  << std::fixed << std::setprecision(1) << 100 - prop << "% menor que a media" << std::endl;
+            std::cout  << std::fixed << std::setprecision(2) << 100 - prop << "% menor que a media" << std::endl;
         }
        
-        
-        
-        std::cout << "\nMedia salarial: R$" << std::fixed << std::setprecision(3) << media << std::endl;
+        std::cout << "\nMedia salarial: R$" << std::fixed << std::setprecision(2) << media << std::endl;
     }
 
 

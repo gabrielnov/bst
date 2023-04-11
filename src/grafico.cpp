@@ -2,6 +2,7 @@
 
 void plot(ArvoreBST *bst){
     struct faixaSalarial fs;
+	// caractere que sera usado para plotar as barras do grafico
 	char m = ']';
     int total = 0, space = 6;
 	std::string traco;
@@ -16,8 +17,10 @@ void plot(ArvoreBST *bst){
 
     std::cout << "Total de registros: " << total << "\n\n";
     
+	// usado para encontrarmos a proporcao correta do grafico
     int div = divisor(total);
 
+	// imprimos cada faixa de acordo com a sua quantidade
 	std::cout << std::setw(2) << ' ' << "faixa salarial" << std::endl;	
 	std::cout << std::setw(space) << ' ' << " ^ " << std::endl;	
 	std::cout << std::setw(space) << ' ' << " | " << std::endl;

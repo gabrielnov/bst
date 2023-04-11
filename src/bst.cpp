@@ -280,18 +280,20 @@ No* ArvoreBST::excluir(No* t, std::string key){
   		{	
   			if(choice == 3){
   				if(no->getPessoa()->getCargoBase() == procurar || no->getPessoa()->getCargoComissao() == procurar){
-  					if(no->getPessoa()->getSalarioBruto() > *maximo){
+  					if(no->getPessoa()->getSalarioBruto() >= *maximo){
+//  						std::cout << *maximo << " ";
+//  						std::cout << no->getChave() << " " << no->getPessoa()->getSalarioBruto() << std::endl;
   						*maximo = no->getPessoa()->getSalarioBruto();
 					}
 				}
 			} else if (choice == 4) {
 				if(no->getPessoa()->getUnidade() == procurar){
-  					if(no->getPessoa()->getSalarioBruto() > *maximo){
+  					if(no->getPessoa()->getSalarioBruto() >= *maximo){
   						*maximo = no->getPessoa()->getSalarioBruto();
 					}
 				}
 			} else if (choice == 5){
-				if(no->getPessoa()->getSalarioBruto() > *maximo){
+				if(no->getPessoa()->getSalarioBruto() >= *maximo){
   					*maximo = no->getPessoa()->getSalarioBruto();
   					noMaximo->getPessoa()->setCargoBase(no->getPessoa()->getCargoBase());
   					noMaximo->getPessoa()->setCargoComissao(no->getPessoa()->getCargoComissao());
@@ -309,18 +311,20 @@ No* ArvoreBST::excluir(No* t, std::string key){
   		{	
   			if(choice == 3){
   				if(no->getPessoa()->getCargoBase() == procurar || no->getPessoa()->getCargoComissao() == procurar){
-  					if(no->getPessoa()->getSalarioBruto() < *minimo){
+  					if(no->getPessoa()->getSalarioBruto() <= *minimo && no->getPessoa()->getSalarioBruto() != 0.0){
+//  						std::cout << *minimo << " ";
+//  						std::cout << no->getChave() << " " << no->getPessoa()->getSalarioBruto() << std::endl;
   						*minimo = no->getPessoa()->getSalarioBruto();
 					}
 				}	
 			} else if (choice == 4){
 				if(no->getPessoa()->getUnidade() == procurar){
-  					if(no->getPessoa()->getSalarioBruto() < *minimo){
+  					if(no->getPessoa()->getSalarioBruto() <= *minimo && no->getPessoa()->getSalarioBruto() != 0.0){
   						*minimo = no->getPessoa()->getSalarioBruto();
 					}
 				}
 			} else if (choice == 5){
-				if(no->getPessoa()->getSalarioBruto() < *minimo){
+				if(no->getPessoa()->getSalarioBruto() <= *minimo && no->getPessoa()->getSalarioBruto() != 0.0){
   					*minimo = no->getPessoa()->getSalarioBruto();
   					noMinimo->getPessoa()->setCargoBase(no->getPessoa()->getCargoBase());
   					noMinimo->getPessoa()->setCargoComissao(no->getPessoa()->getCargoComissao());
@@ -341,7 +345,7 @@ No* ArvoreBST::excluir(No* t, std::string key){
 		
 		//media cargo 1
 		mediaAnalise(cargo1, pSoma, pPessoas, raiz, 3);
-		std::cout << soma << " " << pessoas << std::endl;
+//		std::cout << soma << " " << pessoas << std::endl;
 		media1 = soma/pessoas; //guarda o valor na variavel 
 //		std::cout << media1 << " " << pessoas << std::endl;
 		*pPessoas = 0, *pSoma = 0.0; //reseta os valores
@@ -354,7 +358,9 @@ No* ArvoreBST::excluir(No* t, std::string key){
 		findMaxAnalise(cargo1, pMaximo1, raiz, 3, nullptr);
 		minimo1 = maximo1;
 		findMinAnalise(cargo1, pMinimo1, raiz, 3, nullptr);
-		 
+//		std::cout << minimo1 << " " << maximo1;
+		
+		
 		//Max e Min para cargo2 
 		findMaxAnalise(cargo2, pMaximo2, raiz, 3, nullptr);
 		minimo2 = maximo2;
